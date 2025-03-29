@@ -15,6 +15,9 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    KanitBlack: require('../assets/fonts/Kanit-Black.ttf'),
+    KanitBold: require('../assets/fonts/Kanit-Bold.ttf'),
+    KanitItalic: require('../assets/fonts/Kanit-Italic.ttf')
   });
 
   useEffect(() => {
@@ -29,7 +32,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}>
         {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" /> */}
       </Stack>
