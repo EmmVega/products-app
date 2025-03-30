@@ -13,7 +13,8 @@ export const API_URL =
 console.log(({ STAGE, [Platform.OS]: API_URL}));
 
 const productsApi = axios.create({
-    baseURL: 'localhost:3000/api',
+    baseURL: API_URL,
 })
 
 export { productsApi }
+

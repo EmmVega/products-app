@@ -26,13 +26,13 @@ export const authLogin = async (email: string, password: string) => {
     email = email.toLowerCase();
 
     try {
-        const { data } = await productsApi.post<AuthResponse>('/auth/losing', {
+        console.log('INTENTNANDO CON', email, password);
+        const { data } = await productsApi.post<AuthResponse>('/auth/login', {
             email,
             password
         })
         return returnUserToken(data);
     } catch (e) {
-        console.log(e);
         return null;
     }
 }
