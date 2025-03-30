@@ -9,6 +9,7 @@ const ThemedLink = ({style, ...rest}: Props) => {
     const primaryColor = useThemeColor({}, 'primary')
     return (
         <Link 
+        replace
             style={[
                 {
                     color: primaryColor

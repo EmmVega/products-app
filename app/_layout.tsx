@@ -1,4 +1,5 @@
 import { useColorScheme } from '@/presentation/theme/hooks/useColorScheme';
+import { useThemeColor } from '@/presentation/theme/hooks/useThemeColor';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -20,6 +21,7 @@ export default function RootLayout() {
     KanitBold: require('../assets/fonts/Kanit-Bold.ttf'),
     KanitItalic: require('../assets/fonts/Kanit-Italic.ttf')
   });
+  const backgroundColor = useThemeColor({}, "background")
 
   useEffect(() => {
     if (loaded) {
@@ -32,7 +34,12 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView
+      style={{
+        backgroundColor: backgroundColor,
+        flex: 1
+      }}
+    >
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack
         screenOptions={{

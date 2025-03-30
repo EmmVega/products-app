@@ -2,12 +2,13 @@ import ThemedButton from '@/presentation/theme/components/ThemedButton';
 import ThemedLink from '@/presentation/theme/components/ThemedLink';
 import { ThemedText } from '@/presentation/theme/components/ThemedText';
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput';
+import { useThemeColor } from '@/presentation/theme/hooks/useThemeColor';
 import React from 'react';
-import { KeyboardAvoidingView, StyleSheet, TextInput, useWindowDimensions, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView, ScrollView, StyleSheet, TextInput, useWindowDimensions, View } from 'react-native';
 
 const LoginScreen = () => {
     const {height} = useWindowDimensions();
+    const background = useThemeColor({}, "background")
     return (
         <KeyboardAvoidingView
             behavior='padding'
@@ -17,7 +18,8 @@ const LoginScreen = () => {
         >
             <ScrollView 
                 style={{
-                        paddingHorizontal: 40
+                        paddingHorizontal: 40,
+                        backgroundColor: background
                     }}
             >
                 <View 
