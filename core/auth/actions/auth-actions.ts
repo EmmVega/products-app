@@ -1,4 +1,4 @@
-import { productsApi } from "../api/productsApi";
+import { productsApi } from "../../api/productsApi";
 import { User } from "../interface/user";
 
 export interface AuthResponse {
@@ -26,7 +26,6 @@ export const authLogin = async (email: string, password: string) => {
     email = email.toLowerCase();
 
     try {
-        console.log('INTENTNANDO CON', email, password);
         const { data } = await productsApi.post<AuthResponse>('/auth/login', {
             email,
             password

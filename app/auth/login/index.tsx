@@ -31,7 +31,6 @@ const LoginScreen = () => {
         setIsPosting(false);
 
         if(wasSuccesful) {
-            console.log('SE LOGRO');
             router.replace("/")
             return;
         }
