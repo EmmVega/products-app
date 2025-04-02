@@ -1,5 +1,7 @@
 import ProductImages from '@/presentation/products/components/ProductImages';
+import ThemedButtonGroup from '@/presentation/products/components/ThemedButtonGroup';
 import useProduct from '@/presentation/products/hooks/useProduct';
+import ThemedButton from '@/presentation/theme/components/ThemedButton';
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput';
 import { ThemedView } from '@/presentation/theme/components/ThemedView';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,7 +33,6 @@ const ProductScreen = () => {
 
 
     if(productQuery.isLoading) {
-        console.log(productQuery.isLoading);
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center'}}>
                 <ActivityIndicator 
@@ -89,6 +90,34 @@ const ProductScreen = () => {
                     <ThemedTextInput placeholder='Precio' style={{ flex: 1}}/>
                     </View>
                 </ThemedView>
+                <ThemedView style={{
+                    marginHorizontal: 10
+                }}>
+                    <ThemedButtonGroup 
+                        options={['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']}
+                        selectedOptions={product.sizes}
+                        onSelect={(options) => console.log({options})}
+                    />
+                    <ThemedButtonGroup 
+                        options={['kid', 'men', 'woman', 'unisex']}
+                        selectedOptions={[product.gender]}
+                        onSelect={(options) => console.log({options})}
+                    />
+                </ThemedView>
+                <View
+                     style={{
+                        marginHorizontal: 10,
+                        marginBottom: 50,
+                        marginTop: 20
+                    }}
+                >
+                    <ThemedButton 
+                        icon='save-outline'
+                        onPress={() => console.log('guardar')}
+                    >
+                        Guardadito
+                    </ThemedButton>
+                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
