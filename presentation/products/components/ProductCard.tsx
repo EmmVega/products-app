@@ -3,7 +3,6 @@ import { ThemedText } from "@/presentation/theme/components/ThemedText";
 import { ThemedView } from "@/presentation/theme/components/ThemedView";
 import { router } from "expo-router";
 import { TouchableOpacity, Image } from "react-native";
-
 interface Props {
     product: Product;
   }

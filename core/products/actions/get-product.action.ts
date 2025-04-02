@@ -14,7 +14,7 @@ export const getProducts = async (limit = 20, offset = 0) => {
                     return {
                         ...product,
                         images: product.images.map(
-                            image => `${API_URL}/files/products/${image}`
+                            image => `${API_URL}/files/product/${image}`
                         )
                     }
                 })

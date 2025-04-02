@@ -28,7 +28,7 @@ const Index = () => {
             paddingHorizontal: 20
         }}>
          <ProductList 
-            products={productsQuery.data?.pages.flatMap(page => page) ?? []}
+            products={productsQuery.data?.pages.flatMap((page) => page) ?? []}
             loadNextPage={loadNextPage}
             />
         </View>

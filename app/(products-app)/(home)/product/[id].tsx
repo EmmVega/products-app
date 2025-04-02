@@ -1,3 +1,4 @@
+import ProductImages from '@/presentation/products/components/ProductImages';
 import useProduct from '@/presentation/products/hooks/useProduct';
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput';
 import { ThemedView } from '@/presentation/theme/components/ThemedView';
@@ -44,10 +45,15 @@ const ProductScreen = () => {
         return <Redirect href="/(products-app)/(home)"/>
     }
 
+    const product = productQuery.data;
+
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? "padding" : undefined}
         >
+            <ProductImages
+                images={product.images}
+            />
             <ScrollView>
                 <ThemedView style={{ marginHorizontal: 10, marginTop: 20}}>
                     <ThemedTextInput 
@@ -91,3 +97,4 @@ const ProductScreen = () => {
 const styles = StyleSheet.create({})
 
 export default ProductScreen;
+
