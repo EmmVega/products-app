@@ -13,11 +13,14 @@ const ThemedTextInput = ({icon, ...rest}: Props) => {
     const [isActive, setIsActive] = useState(false)
     const inputRef = useRef<TextInput>(null)
     return (
-        <View style={{
-            ...styles.border,
-            borderColor: isActive ? primaryColor : 'ccc'
-        }}
-        onTouchStart={() => inputRef.current?.focus()}
+        <View 
+            style={[
+                {
+                ...styles.border,
+                borderColor: isActive ? primaryColor : 'ccc'
+                }, 
+            ]}
+            onTouchStart={() => inputRef.current?.focus()}
         >   
         {icon && (
             <Ionicons 
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     border: {
         borderWidth: 1,
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center'
