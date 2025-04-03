@@ -1,23 +1,49 @@
+import { updateCreateProduct } from '@/core/products/actions/create-update-product.action';
 import { getProductById } from '@/core/products/actions/get-product-by-id.action';
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Product } from '@/core/products/interface/product.interface';
+import { dataTagSymbol, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React, { useRef } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
+
 
 const useProduct = (productId: string) => {
+    const queryClient = useQueryClient();
+    const productIdRef = useRef(productId);
+    
     const productQuery = useQuery({
-        queryKey: ["product", productId],
+        queryKey: ["products", productId],
         queryFn: () => getProductById(productId),
         staleTime: 1000 * 60 * 60,
     })
 
-    //mutation
+    //mutacion
+    const productMutation = useMutation({
+    mutationFn: async (data: Product) => updateCreateProduct({
+        ...data,
+        id: productIdRef.current
+    }),
+
+    onSuccess: (data: Product) => {
+        productIdRef.current = data.id;
+
+        queryClient.invalidateQueries({
+            queryKey: ['products', 'infinite']
+        })
+        queryClient.invalidateQueries({
+            queryKey: ['products', data.id]
+        })
+        Alert.alert('producto guardado', 'product correctly saved')
+    }
+})
 
     // mantener id?
 
     return ({
-        productQuery
+        productQuery,
+        productMutation
     });
 }
+
 
 const styles = StyleSheet.create({})
 
