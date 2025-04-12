@@ -9,12 +9,14 @@ import * as MediaLibrary from 'expo-media-library';
 
 import { ThemedText } from '@/presentation/theme/components/ThemedText';
 import { useThemeColor } from '@/presentation/theme/hooks/useThemeColor';
+import { useCameraStore } from '@/presentation/store/useCameraStore';
 
 export default function CameraScreen() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [mediaPermission, requestMediaPermission] = MediaLibrary.usePermissions();
   const [selectedImage, setSelectedImage] = useState<string>()
+  const { addSelectedImage } = useCameraStore();
   
   const cameraRef = useRef<CameraView>(null);
 
@@ -75,6 +77,7 @@ export default function CameraScreen() {
   const onPictureAccepted = async () => {
     if(!selectedImage) return;
     await MediaLibrary.createAssetAsync(selectedImage as string)
+    addSelectedImage(selectedImage)
     router.dismiss();
   }
 
