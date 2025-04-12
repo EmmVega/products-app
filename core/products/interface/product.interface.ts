@@ -14,5 +14,5 @@ export interface Product {
   gender: Gender;
   tags: string[];
   images: string[];
-  user: User;
+  user?: User;
 }
