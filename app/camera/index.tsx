@@ -6,6 +6,7 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 
 import { ThemedText } from '@/presentation/theme/components/ThemedText';
 import { useThemeColor } from '@/presentation/theme/hooks/useThemeColor';
@@ -85,6 +86,25 @@ export default function CameraScreen() {
     setSelectedImage(undefined)
   }
 
+  const onPickImages = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ['images'],
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 0.5,
+        });
+        if(result.canceled) return;
+
+        console.log(result.assets);
+
+        result.assets.forEach(asset => {
+            addSelectedImage(asset.uri);
+        })
+
+        router.dismiss();
+  }
+
   function toggleCameraFacing() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   }
@@ -103,11 +123,8 @@ export default function CameraScreen() {
       <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
             <ShutterButton onPress={onShutterButtonPress}/>
             <FlipCameraButton onPress={toggleCameraFacing}/>
-            <GalleryButton />
+            <GalleryButton onPress={onPickImages}/>
             <ReturnCancelButton onPress={onReturnCancel}/>
-          {/* <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity> */}
       </CameraView>
     </View>
   );
